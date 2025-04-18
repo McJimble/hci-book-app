@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import { resolve } from 'path';
 
 const fullReloadAlways = {
     name: 'full-reload-always',
@@ -18,6 +19,12 @@ export default defineConfig({
     build: {
         sourcemap: true,
         emptyOutDir: true,
+        rollupOptions: {
+            input: {
+                main: resolve(__dirname, 'index.html'),
+                browse: resolve(__dirname, 'pages/browse.html'),
+            },
+        }
     },
     server: {
         watch: {
@@ -27,5 +34,5 @@ export default defineConfig({
             clientPort: 5200,
         }
     },
-    base: "/hci-book-app"
+    base: "/hci-book-app/",
 });

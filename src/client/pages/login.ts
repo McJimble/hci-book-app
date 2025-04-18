@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         loginButtonElement?.addEventListener("click", () => {
 
             localStorage.setItem('username', usernameInput.value);
-            window.location.href = "/pages/browse.html"
+            window.location.href = "./pages/browse.html"
         });
 
         localStorage.setItem('username', 'User123');
