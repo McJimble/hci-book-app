@@ -27,5 +27,5 @@ export default defineConfig({
             clientPort: 5200,
         }
     },
-    base: "/"
+    base: "/hci-book-app"
 });

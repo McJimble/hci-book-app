@@ -1,5 +1,5 @@
 {
-  "homepage": "https://your-username.github.io/your-repo-name",
+  "homepage": "https://mcjimble.github.io/hci-book-app",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
@@ -10,7 +10,9 @@
   "type": "module",
   "devDependencies": {
     "@types/jquery": "^3.5.31",
+    "flatpickr": "^4.6.13",
     "gh-pages": "^6.3.0",
+    "jquery": "^3.7.1",
     "tweakpane": "^4.0.5",
     "vite": "^5.4.11"
   }
