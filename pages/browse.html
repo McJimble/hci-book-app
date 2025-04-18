@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HCI Book App: Browse</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+    
+</head>
+<body class="browse-page">
+    <div class="browse-wrapper">
+        <div class="title-cell">
+            <div class="app-logo">
+                <img src="../img/logo.png" alt="">
+            </div>
+            <h1 class="app-title">
+                Name of App
+            </h1>
+        </div>
+        <div class="search-cell">
+            <div class="search-bar-area">
+                <div class="search-icon" id="search-icon">
+                    <img src="../img/search.png" alt="">
+                </div>
+                <div class="search-entry">
+                    <input id="search-input" type="text" placeholder="Search"/>
+                </div>
+            </div>
+            <div class="filter-area">
+                <div class="search-header" id="search-header">
+                    <h3>
+                        My books
+                    </h3>
+                </div>
+                <div class="search-filter-bar" id="search-filter-bar">
+                    <div class="search-filter-bar-main-info" id="search-filter-bar-main-info">
+                        <div class="search-filter-state-icon" id="search-filter-state-icon">
+                            <img src="../img/arrow.png" alt="">
+                        </div>
+                        <div class="search-filter-state-text filter-off-text" id="filter-state-text">
+                            <h3>
+                                Filter:
+                            </h3>
+                            <h4>
+                                OFF
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="search-filter-bar-options-area" id="search-filter-bar-options-area">
+                        <div class="blank-grid-item">
+                        </div>
+                        <div class="grid-item-checkbox-container" title="Only show books in your list that you've completed.">
+                            <span class="checkmark">Complete</span>
+                            <input type="checkbox" id="complete-checkbox"/>
+                        </div>
+                        <div class="grid-item-checkbox-container" title="Only show books in your list that you have NOT completed.">
+                            <span class="checkmark">Incomplete</span>
+                            <input type="checkbox" id="incomplete-checkbox"/>
+                        </div>
+                        <div class="grid-item-datepicker-container" title="Only show books in your list that you've completed AFTER the provided date.">
+                            <span class="filter-datepicker-text">Completed After:</span>
+                            <input class="filter-datepicker" id="completed-after-datepicker" placeholder="Select Date.."/>
+                        </div>
+                        <div class="grid-item-datepicker-container" title="Only show books in your list that you've completed before the provided date.">
+                            <span class="filter-datepicker-text">Completed Before:</span>
+                            <input class="filter-datepicker" id="completed-before-datepicker" placeholder="Select Date.."/>
+                        </div>
+                        <div class="grid-item-datepicker-container" title="Only show books that you started reading AFTER the provided date.">
+                            <span class="filter-datepicker-text">Started After:</span>
+                            <input class="filter-datepicker" id="started-after-datepicker" placeholder="Select Date.."/>
+                        </div>
+                        <div class="grid-item-datepicker-container" title="Only show books that you started reading before the provided date.">
+                            <span class="filter-datepicker-text">Started Before:</span>
+                            <input class="filter-datepicker" id="started-before-datepicker" placeholder="Select Date.."/>
+                        </div>
+                        
+                        <div class="grid-item-datepicker-container" title="Only show books that were published AFTER the provided date">
+                            <span class="filter-datepicker-text">Published After:</span>
+                            <input class="filter-datepicker" id="published-after-datepicker" placeholder="Select Date.."/>
+                        </div>
+                        <div class="grid-item-datepicker-container" title="Only show books that were published before the provided date">
+                            <span class="filter-datepicker-text">Published Before:</span>
+                            <input class="filter-datepicker" id="published-before-datepicker" placeholder="Select Date.."/>
+                        </div>
+                        <div class="grid-item-dropdown-container" title="Only show books of the provided genre type.">
+                            <span class="filter-dropdown-text">Genre:</span>
+                            <select name="genre" id="genre-dropdown">
+                                <option value=""></option>
+                                <option value="Art">Art</option>
+                                <option value="Biography">Biography</option>
+                                <option value="Business">Business</option>
+                                <option value="Chick Lit">Chick Lit</option>
+                                <option value="Children">Children</option>
+                                <option value="Christianity">Christianity</option>
+                                <option value="Classic Literature">Classic</option>
+                                <option value="Comic books, strips">Comics</option>
+                                <option value="Cookbooks">Cookbooks</option>
+                                <option value="Crime">Crime</option>
+                                <option value="Fantasy">Fantasy</option>
+                                <option value="Fiction">Fiction</option>
+                                <option value="Graphic Novels">Graphic Novels</option>
+                                <option value="Fiction, historical, general">Historical Fiction</option>
+                                <option value="History">History</option>
+                                <option value="Fiction, horror">Horror</option>
+                                <option value="Humor">Humor and Comedy</option>
+                                <option value="Personal memoirs">Memoir</option>
+                                <option value="Music">Music</option>
+                                <option value="Fiction, mystery & detective, general">Mystery</option>
+                                <option value="Nonfiction">Nonfiction</option>
+                                <option value="Philosophy">Philosophy</option>
+                                <option value="Poetry">Poetry</option>
+                                <option value="Psychology">Psychology</option>
+                                <option value="Religion">Religion</option>
+                                <option value="Romance">Romance</option>
+                                <option value="Science">Science</option>
+                                <option value="Science fiction">Science Fiction</option>
+                                <option value="Self-help techniques">Self Help</option>
+                                <option value="Spirituality">Spirituality</option>
+                                <option value="Sports">Sports</option>
+                                <option value="Fiction, thrillers, general">Thriller</option>
+                                <option value="Travel">Travel</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="section-navigation-cell">
+            <div class="nav-section selected-nav-section" id="home-ribbon">
+                <div class="selection-emphasis-dot-container">
+                    <div class="selection-emphasis-dot"></div>
+                </div>
+                <h3>
+                    Home
+                </h3>
+                <div class="selection-emphasis-dot-container">
+                    <div class="selection-emphasis-dot"></div>
+                </div>
+            </div>
+            <div class="nav-section" id="browse-ribbon">
+                <div class="selection-emphasis-dot-container">
+                    <div class="selection-emphasis-dot"></div>
+                </div>
+                <h3>
+                    Browse
+                </h3>
+                <div class="selection-emphasis-dot-container">
+                    <div class="selection-emphasis-dot"></div>
+                </div>
+            </div>
+        </div>
+        <div class="book-display-cell">
+            <div class="book-display-list fade-in-active" id="book-display">
+            </div>
+            <div class="back-to-normal-view-button inactive-element" id="back-to-normal-view-button">
+                <img src="../img/back-arrrow.png" alt="">
+            </div>
+            <div class="book-display-controls" id="book-display-controls">
+                <div class="book-display-controls-list-btn display-mode-toggle-btn book-display-controls-btn-is-toggled">
+                    <img src="../img/list.png" alt="">
+                </div>
+                <div class="book-display-controls-grid-btn display-mode-toggle-btn">
+                    <img src="../img/grid.png" alt="">
+                </div>
+            </div>
+            <div class="search-sort-options">
+            </div>
+        </div>
+    </div>
+    <script type="module" src="../src/client/pages/browse.ts"></script>
+</body>
+</html>
