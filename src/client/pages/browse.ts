@@ -476,91 +476,9 @@ const filterBar = document.querySelector('#search-filter-bar') as HTMLElement;
 const filterStateIcon = document.querySelector('#search-filter-state-icon') as HTMLElement;
 const filterOptionsGrid = document.querySelector('#search-filter-bar-options-area') as HTMLElement;
 
-searchIcon.addEventListener('click', () => {
-    if (browsingFullDatabase) {
-        setSearchSectionHeader("Search Results");
-    }
-
-    hasSearchedOnce = true;
-
-    searchBarValue = searchInput.value;
-    fetchAndFilterBooks();
-});
-
-filterBarToggleBox.addEventListener("click", () => {
-    isFilterBarOpen = !isFilterBarOpen;
-    if (isFilterBarOpen) {
-
-        filterStateIcon.classList.remove('filter-state-icon-close-animation');
-        filterStateIcon.classList.add('filter-state-icon-open-animation');
-
-        filterBar.classList.remove('filter-area-close-animation');
-        filterBar.classList.add('filter-area-open-animation');
-
-        filterOptionsGrid.classList.remove('filter-options-close-animation');
-        filterOptionsGrid.classList.add('filter-options-open-animation');
-    }
-    else {
-        filterStateIcon.classList.remove('filter-state-icon-open-animation');
-        filterStateIcon.classList.add('filter-state-icon-close-animation');
-
-        filterBar.classList.remove('filter-area-open-animation');
-        filterBar.classList.add('filter-area-close-animation');
-
-        filterOptionsGrid.classList.remove('filter-options-open-animation');
-        filterOptionsGrid.classList.add('filter-options-close-animation');
-    }
-})
-
 // Home and Browse ribbons.
 const homeRibbon = document.querySelector('#home-ribbon') as HTMLElement;
 const browseRibbon = document.querySelector('#browse-ribbon') as HTMLElement;
-
-homeRibbon.addEventListener("click", () => {
-    if (browsingFullDatabase) {
-        browsingFullDatabase = false;
-
-        const selectedNavClass = "selected-nav-section";
-        if (!homeRibbon.classList.contains(selectedNavClass)) {
-            homeRibbon.classList.add(selectedNavClass);
-            browseRibbon.classList.remove(selectedNavClass);
-        }
-
-        setSearchSectionHeader("My Books");
-        
-        fetchedBooks = [];
-        searchBarValue = '';
-        searchInput.value = '';
-
-        if (addedBooks.size == 0) {
-            tryEnableTutorialBanner();
-        }
-        else {
-            setSingleItemView(false);
-            fetchAndFilterBooks();
-        }
-    }
-});
-
-browseRibbon.addEventListener("click", () => {
-    if (!browsingFullDatabase) {
-        browsingFullDatabase = true;
-
-        const selectedNavClass = "selected-nav-section";
-        if (!browseRibbon.classList.contains(selectedNavClass)) {
-            browseRibbon.classList.add(selectedNavClass);
-            homeRibbon.classList.remove(selectedNavClass);
-        }
-
-        setSearchSectionHeader("Browse Books");
-        
-        fetchedBooks = [];
-        searchBarValue = '';
-        searchInput.value = '';
-        tryEnableTutorialBanner();
-        setSingleItemView(false);
-    }
-});
 
 const backToNormalViewButton = document.querySelector('#back-to-normal-view-button');
 const bookDisplayModeElement = document.querySelector('#book-display-controls');
@@ -601,7 +519,6 @@ function refreshFilterMainInfoVisuals() {
                                             ON
                                         </h4>
                                     `;
-        // TODO: Make "Clear filters" button appear?
     }
     else 
     {
@@ -616,7 +533,6 @@ function refreshFilterMainInfoVisuals() {
                                             OFF
                                         </h4>
                                     `;
-        // TODO: Make "Clear filters" button disappear?
     }
 }
 
@@ -652,11 +568,10 @@ function refreshBookDisplay() {
 
 function filterBooks() {
 
-    if (unfilteredFetchedBooks.length < 1)
+    if (unfilteredFetchedBooks.length < 1 || (!browsingFullDatabase && addedBooks.size < 1))
         return;
 
     fetchedBooks = unfilteredFetchedBooks.slice();
-    //console.log(fetchedBooks);
     // Complete box and incomplete box are mutually exclusive, and just check if
     // book is completed after the current date
     if (completeCheckbox.checked && !incompleteCheckbox.checked) {
@@ -939,6 +854,90 @@ function bookDisplayEventListeners(){
     
     genreDropdown.addEventListener('change', (e) => {
         filterAndRefreshBooks();
+    })
+
+    // Event listeners for section navigation ribbons.
+    homeRibbon.addEventListener("click", () => {
+        if (browsingFullDatabase) {
+            browsingFullDatabase = false;
+    
+            const selectedNavClass = "selected-nav-section";
+            if (!homeRibbon.classList.contains(selectedNavClass)) {
+                homeRibbon.classList.add(selectedNavClass);
+                browseRibbon.classList.remove(selectedNavClass);
+            }
+    
+            setSearchSectionHeader("My Books");
+            
+            fetchedBooks = [];
+            searchBarValue = '';
+            searchInput.value = '';
+    
+            if (addedBooks.size == 0) {
+                tryEnableTutorialBanner();
+            }
+            else {
+                setSingleItemView(false);
+                fetchAndFilterBooks();
+            }
+        }
+    });
+    
+    browseRibbon.addEventListener("click", () => {
+        if (!browsingFullDatabase) {
+            browsingFullDatabase = true;
+    
+            const selectedNavClass = "selected-nav-section";
+            if (!browseRibbon.classList.contains(selectedNavClass)) {
+                browseRibbon.classList.add(selectedNavClass);
+                homeRibbon.classList.remove(selectedNavClass);
+            }
+    
+            setSearchSectionHeader("Browse Books");
+            
+            fetchedBooks = [];
+            searchBarValue = '';
+            searchInput.value = '';
+            tryEnableTutorialBanner();
+            setSingleItemView(false);
+        }
+    });
+
+    // Search section/filter bar event listeners.
+    searchIcon.addEventListener('click', () => {
+        if (browsingFullDatabase) {
+            setSearchSectionHeader("Search Results");
+        }
+    
+        hasSearchedOnce = true;
+    
+        searchBarValue = searchInput.value;
+        fetchAndFilterBooks();
+    });
+    
+    filterBarToggleBox.addEventListener("click", () => {
+        isFilterBarOpen = !isFilterBarOpen;
+        if (isFilterBarOpen) {
+    
+            filterStateIcon.classList.remove('filter-state-icon-close-animation');
+            filterStateIcon.classList.add('filter-state-icon-open-animation');
+    
+            filterBar.classList.remove('filter-area-close-animation');
+            filterBar.classList.add('filter-area-open-animation');
+    
+            filterOptionsGrid.classList.remove('filter-options-close-animation');
+            filterOptionsGrid.classList.add('filter-options-open-animation');
+        }
+        else {
+            filterStateIcon.classList.remove('filter-state-icon-open-animation');
+            filterStateIcon.classList.add('filter-state-icon-close-animation');
+    
+            filterBar.classList.remove('filter-area-open-animation');
+            filterBar.classList.add('filter-area-close-animation');
+    
+            filterOptionsGrid.classList.remove('filter-options-open-animation');
+            filterOptionsGrid.classList.add('filter-options-close-animation');
+        }
     })
     
     // For each date picker, prevent invalid dates from being input that logically make no sense.
