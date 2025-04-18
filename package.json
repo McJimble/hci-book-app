@@ -8,6 +8,7 @@
   "type": "module",
   "devDependencies": {
     "@types/jquery": "^3.5.31",
+    "gh-pages": "^6.3.0",
     "tweakpane": "^4.0.5",
     "vite": "^5.4.11"
   }
